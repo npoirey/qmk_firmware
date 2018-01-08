@@ -122,11 +122,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *        |RESET |------| stop |------|------|VOLDU |               ..               | play |------|------| stop |------| num  |        *
   * ,------+------|      |------| pre  | next |------|               ..               |------| pre  | next |------|      |------+------. *
   * |      |      |------|      |------|------| play |               ..               | play |------|------|  8   |------|  -   |      | *
-  * |------+------|      |------|      |      |------|               ..               |------| next |  7   |------|  9   |------+------| *
-  * |      |      |------|  -   |------|------|      |               ..               | pre  |------|------|  5   |------|  +   |      | *
-  * |------+------|      |------|  +   |scrolu|------|               ..               |------| rclic|  4   |------|  6   |------+------| *
-  * |      |      |------|  /   |------|------|      |               ..               | lclic|------|------|  2   |------|  *   |      | *
-  * |------+------|      |------|  *   |scrold|------|-------------. .. .-------------|------| mclic|  1   |------|  3   |------+------| *
+  * |------+------|      |------|      | mclic|------|               ..               |------| mclic|  7   |------|  9   |------+------| *
+  * |      |      |------|  -   |------|------| rclic|               ..               | rclic|------|------|  5   |------|  +   |      | *
+  * |------+------|      |------|  +   |scrolu|------|               ..               |------| pre  |  4   |------|  6   |------+------| *
+  * |      |      |------|  /   |------|------| lclic|               ..               | lclic|------|------|  2   |------|  *   |      | *
+  * |------+------|      |------|  *   |scrold|------|-------------. .. .-------------|------| next |  1   |------|  3   |------+------| *
   * |      |      |------|      |------|------|      |      |      | .. |      |      |      |------|------| num. |------|  /   |      | *
   * |------+------|      |------|      |      |------|------|------  ..  ------|------|------|      |  0   |------|  .   |------+------| *
   * |      |      |------/      \-------------|      |      |        ..        |      |      |-------------/      \------|  ,   |      | *
@@ -136,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MEDIA] = KEYMAP(
            RESET,   KC_SLCK, KC_PAUS, KC_MUTE, KC_VOLD, KC_VOLU,                                     KC_MUTE, KC_VOLD, KC_VOLU, KC_PSCR, KC_CALC, KC_NLCK,          \
   KC_TRNS, KC_TRNS, KC_TRNS, KC_MSTP, KC_MPRV, KC_MNXT, KC_MPLY,                                     KC_MPLY, KC_MPRV, KC_MNXT, KC_MSTP, KC_TRNS, KC_PMNS, KC_TRNS, \
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_WH_U, KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_BTN4, KC_BTN5, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, KC_TRNS, \
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_PMNS, KC_PPLS, KC_WH_U, KC_TRNS,                                     KC_BTN1, KC_BTN2, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, KC_TRNS, \
-  KC_TRNS, KC_TRNS, KC_TRNS ,KC_PSLS, KC_PAST, KC_WH_D, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN3, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, KC_TRNS, \
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_WH_U, KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_BTN2, KC_BTN3, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, KC_TRNS, \
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_PMNS, KC_PPLS, KC_WH_U, KC_BTN1,                                     KC_BTN1, KC_BTN4, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, KC_TRNS, \
+  KC_TRNS, KC_TRNS, KC_TRNS ,KC_PSLS, KC_PAST, KC_WH_D, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN5, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, KC_TRNS, \
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_KP_0, KC_PDOT, BP_DOT,  BP_COMM, KC_TRNS,  \
   //left pedals
   KC_BTN3, M(M_RP), KC_TRNS, \
