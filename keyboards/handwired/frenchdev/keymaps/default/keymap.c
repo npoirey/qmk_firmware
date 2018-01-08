@@ -29,6 +29,8 @@ enum macros {
     M_PS,   // paste
     M_SE,   // search
     M_SFU,  // shift and underscore
+    M_SFH,  // shift and home
+    M_SFE,  // shift and end
 };
 
 static uint16_t key_timer_left_pedal;
@@ -61,19 +63,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------|  U   |------|  I   |  F   |------|               ..               |------|  C   |  T   |------|  R   |------+------| *
  * | `    |  A   |------|  Y   |------|------|  ;   |               ..               |  !   |------|------|  UP  |------|  N   |  '/? | *
  * |------+------|  À   |------|  X   |  W   |------|-------------. .. .-------------|------|  M   |  G   |------|  H   |------+------| *
- * | SHIFT|  Z   |------|  .   |------|------|sp/sh |bsp/ct|L2/ins| .. |L2lock|del/CT|sp/sh |------|------| DOWN |------|  Q   |SHIFT | *
+ * | SHIFT|  Z   |------|  .   |------|------|sp/sh |bsp/ct| alt  | .. | CAPS |del/CT|sp/sh |------|------| DOWN |------|  Q   |SHIFT | *
  * |------+------|  /   |------|  ,   | space|------|------|------  ..  ------|------|------| L1/sp| LEFT |------|  UP  |------+------| *
- * | CTRL | win  |------/      \-------------| L1   | alt  |        ..        | CAPS | L1   |-------------/      \------| :    | CTRL | *
+ * | CTRL | win  |------/      \-------------| L1   |L2/ins|        ..        |L2lock| L1   |-------------/      \------| :    | CTRL | *
  * `-------------/                           \-------------/        ..        \-------------/                           \-------------/ *
  *M(M_LP)
  */
 [_BASE] = KEYMAP(
-           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                                          KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,     \
-  KC_ESC,  BP_DQOT, BP_LGIL, BP_RGIL, BP_LPRN, BP_RPRN, BP_DTRM,                                        BP_DCRC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, KC_BSPC, \
-  KC_TAB,  BP_B,    BP_ECUT, BP_O,    BP_P,    BP_EGRV, BP_UNDS,                                        BP_EQL,  BP_K,    BP_V,    BP_D,    BP_L,    BP_J,    KC_ENT,  \
-  BP_GRV,  BP_A,    BP_U,    BP_E,    BP_I,    BP_F,    BP_SCLN,                                        BP_EXLM, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_APOS, \
-  M(M_SF), BP_Z,    BP_AGRV, BP_Y,    BP_X,    KC_RBRACKET,    M(M_SFS), BP_CBSP, M(L2INS), M(L2LOC), BP_CDEL, M(M_SFS),BP_M,    BP_G,    KC_UP,   BP_H,    BP_Q,    M(M_SF), \
-  KC_LCTL, KC_LGUI, KC_PSLS, BP_DOT,  BP_COMM, KC_SPACE,M(M_L1E), KC_LALT,                     KC_CAPS, M(M_L1E),KC_SPACE,KC_LEFT, KC_DOWN, KC_RIGHT,BP_COLN, KC_RCTL,   \
+           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,                                         KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,           \
+  KC_ESC,  BP_DQOT, BP_LGIL, BP_RGIL, BP_LPRN, BP_RPRN,    BP_DTRM,                                       BP_DCRC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, KC_BSPC, \
+  KC_TAB,  BP_B,    BP_ECUT, BP_O,    BP_P,    BP_EGRV,    BP_UNDS,                                       BP_EQL,  BP_K,    BP_V,    BP_D,    BP_L,    BP_J,    KC_ENT,  \
+  BP_GRV,  BP_A,    BP_U,    BP_E,    BP_I,    BP_F,       BP_SCLN,                                       BP_EXLM, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_APOS, \
+  M(M_SF), BP_Z,    BP_AGRV, BP_Y,    BP_X,    KC_RBRACKET,M(M_SFH), BP_CBSP, KC_LALT, KC_CAPS,  BP_CDEL, M(M_SFE),BP_M,    BP_G,    KC_UP,   BP_H,    BP_Q,    M(M_SF), \
+  KC_LCTL, KC_LGUI, KC_PSLS, BP_DOT,  BP_COMM, KC_SPACE,   M(M_L1E), M(L2INS),                  M(L2LOC), M(M_L1E),KC_SPACE,KC_LEFT, KC_DOWN, KC_RIGHT,BP_COLN, KC_RCTL, \
   //left pedals
   M(M_LP), M(M_RP), KC_TRNS, \
   //right pedals
@@ -93,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------|  Ù   |------|  )   |  +   |------|               ..               |------|  Ç   |  <   |------|  &   |------+------| *
   * |      |  =   |------| copy |------|------|  :   |               ..               |  ?   |------|------| PGUP |------|  _   |      | *
   * |------+------|  cut |------| paste|search|------|-------------. .. .-------------|------|  $   |  =   |------|  |   |------+------| *
-  * |      | undo |------|  \   |------|------|      |      |      | .. |      |      |      |------|------| PGDN |------|  /   |      | *
-  * |------+------|      |------|      |      |------|------|------  ..  ------|------|------|      | HOME |------| PGDN |------+------| *
+  * |      | undo |------|      |------|------|      |      |      | .. |      |      |      |------|------| PGDN |------|  /   |      | *
+  * |------+------|  \   |------|      |      |------|------|------  ..  ------|------|------|      | HOME |------| PGDN |------+------| *
   * |      |      |------/      \-------------|      |      |        ..        |      |      |-------------/      \------|      |      | *
   * `-------------/                           \-------------/        ..        \-------------/                           \-------------/ *
   *
@@ -119,12 +121,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *        ,------|SCROLL|------|MUTE  |VOLUD |------.               ..               ,------| pre  | next |------| calc |------.        *
   *        |RESET |------| stop |------|------|VOLDU |               ..               | play |------|------| stop |------| num  |        *
   * ,------+------|      |------| pre  | next |------|               ..               |------| pre  | next |------|      |------+------. *
-  * |      |      |------|scrolu|------|------| play |               ..               | play |------|------|  8   |------|  -   |      | *
-  * |------+------|      |------|      | bt4  |------|               ..               |------| next |  7   |------|  9   |------+------| *
-  * |      |      |------|scrold|------|------| bt5  |               ..               | pre  |------|------|  5   |------|  +   |      | *
-  * |------+------|      |------|mclic | rclic|------|               ..               |------| rclic|  4   |------|  6   |------+------| *
-  * |      |      |------|      |------|------| lclic|               ..               | lclic|------|------|  2   |------|  *   |      | *
-  * |------+------|      |------|      | mclck|------|-------------. .. .-------------|------| mclic|  1   |------|  3   |------+------| *
+  * |      |      |------|      |------|------| play |               ..               | play |------|------|  8   |------|  -   |      | *
+  * |------+------|      |------|      |      |------|               ..               |------| next |  7   |------|  9   |------+------| *
+  * |      |      |------|  -   |------|------|      |               ..               | pre  |------|------|  5   |------|  +   |      | *
+  * |------+------|      |------|  +   |scrolu|------|               ..               |------| rclic|  4   |------|  6   |------+------| *
+  * |      |      |------|  /   |------|------|      |               ..               | lclic|------|------|  2   |------|  *   |      | *
+  * |------+------|      |------|  *   |scrold|------|-------------. .. .-------------|------| mclic|  1   |------|  3   |------+------| *
   * |      |      |------|      |------|------|      |      |      | .. |      |      |      |------|------| num. |------|  /   |      | *
   * |------+------|      |------|      |      |------|------|------  ..  ------|------|------|      |  0   |------|  .   |------+------| *
   * |      |      |------/      \-------------|      |      |        ..        |      |      |-------------/      \------|  ,   |      | *
@@ -134,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MEDIA] = KEYMAP(
            RESET,   KC_SLCK, KC_PAUS, KC_MUTE, KC_VOLD, KC_VOLU,                                     KC_MUTE, KC_VOLD, KC_VOLU, KC_PSCR, KC_CALC, KC_NLCK,          \
   KC_TRNS, KC_TRNS, KC_TRNS, KC_MSTP, KC_MPRV, KC_MNXT, KC_MPLY,                                     KC_MPLY, KC_MPRV, KC_MNXT, KC_MSTP, KC_TRNS, KC_PMNS, KC_TRNS, \
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_WH_U, KC_TRNS, KC_BTN4, KC_BTN5,                                     KC_BTN4, KC_BTN5, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, KC_TRNS, \
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_WH_D, KC_BTN3, KC_BTN2, KC_BTN1,                                     KC_BTN1, KC_BTN2, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, KC_TRNS, \
-  KC_TRNS, M(M_UN), M(M_CUT),M(M_CP), M(M_PS), KC_BTN3, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN3, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, KC_TRNS, \
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_WH_U, KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_BTN4, KC_BTN5, KC_KP_7, KC_KP_8, KC_KP_9, KC_PPLS, KC_TRNS, \
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_PMNS, KC_PPLS, KC_WH_U, KC_TRNS,                                     KC_BTN1, KC_BTN2, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, KC_TRNS, \
+  KC_TRNS, KC_TRNS, KC_TRNS ,KC_PSLS, KC_PAST, KC_WH_D, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN3, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, KC_TRNS, \
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_KP_0, KC_PDOT, BP_DOT,  BP_COMM, KC_TRNS,  \
   //left pedals
   KC_BTN3, M(M_RP), KC_TRNS, \
@@ -210,6 +212,20 @@ void press_enter(void) {
   if(shift_count > 0) register_code (KC_LSHIFT);
 }
 
+void press_home_on_shift(void) {
+  if(shift_count == 1) unregister_code (KC_LSHIFT);
+  register_code (KC_ENT);
+  unregister_code (KC_ENT);
+  if(shift_count == 1) register_code (KC_LSHIFT);
+}
+
+void press_end_on_shift(void) {
+  if(shift_count == 1) unregister_code (KC_LSHIFT);
+  register_code (KC_ENT);
+  unregister_code (KC_ENT);
+  if(shift_count == 1) register_code (KC_LSHIFT);
+}
+
 void press_underscore(void) {
   if(shift_count > 0) unregister_code (KC_LSHIFT);
   register_code ((unsigned char) BP_UNDS);
@@ -275,6 +291,28 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       } else {
         if (timer_elapsed(key_timer_shift) < KEY_DELAY) {
           press_space();
+        }
+        release_shift();
+      }
+      break;
+      case M_SFH: // shift when held, home when tapped
+        if (record->event.pressed) {
+          hold_shift();
+          key_timer_shift = timer_read(); // if the key is being pressed, we start the timer.
+        } else {
+          if (timer_elapsed(key_timer_shift) < KEY_DELAY) {
+            press_home_on_shift();
+          }
+          release_shift();
+        }
+        break;
+    case M_SFE: // shift when held, end when tapped
+      if (record->event.pressed) {
+        hold_shift();
+        key_timer_shift = timer_read(); // if the key is being pressed, we start the timer.
+      } else {
+        if (timer_elapsed(key_timer_shift) < KEY_DELAY) {
+          press_end_on_shift();
         }
         release_shift();
       }
